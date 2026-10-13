@@ -1,12 +1,17 @@
 package com.Ai_Rag_System.service;
 
 import com.Ai_Rag_System.dto.IngestionResponse;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@AllArgsConstructor
 public class DocumentService {
 
     TokenTextSplitter textSplitter;
