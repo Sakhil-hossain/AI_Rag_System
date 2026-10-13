@@ -1,4 +1,24 @@
 package com.Ai_Rag_System.config;
 
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.transformer.splitter.TokenTextSplitter;
+import org.springframework.context.annotation.Bean;
+
 public class AiConfig {
+
+    @Bean
+    public ChatClient getChatClient(ChatClient.Builder builder) {
+        return builder.defaultSystem("Ai-Assistance").build();
+    }
+
+    @Bean
+    public TokenTextSplitter getTokenSplitter() {
+        return TokenTextSplitter.builder()
+                .withChunkSize(500)
+                .withMinChunkSizeChars(100)
+                .withMinChunkLengthToEmbed(10)
+                .withMaxNumChunks(10_000)
+                .withKeepSeparator(true)
+                .build();
+    }
 }
