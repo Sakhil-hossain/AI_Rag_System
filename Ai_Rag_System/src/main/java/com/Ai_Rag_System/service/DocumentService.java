@@ -4,9 +4,11 @@ import com.Ai_Rag_System.dto.IngestionResponse;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.ai.document.Document;
+import org.springframework.ai.reader.tika.TikaDocumentReader;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -25,6 +27,14 @@ public class DocumentService {
         return store(source, documentList);
     }
 
+
+    public IngestionResponse ingestDocument(MultipartFile file) {
+        String source = file.getOriginalFilename();
+        TikaDocumentReader reader = new TikaDocumentReader(file.getResource());
+        List<Document>documentList = reader.get();
+        return store(source, documentList);
+
+    }
 
 
     public IngestionResponse store( String source, List<Document> documentList) {
